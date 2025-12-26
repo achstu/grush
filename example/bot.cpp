@@ -5,6 +5,13 @@ int main() {
   int board_size, turns;
   cin >> board_size >> turns;
 
+  int players;
+  cin >> players;
+  for (int p = 0; p < players; p++) {
+    int row, col;
+    cin >> row >> col;
+  }
+
   for (int t = 0; t < turns; t++) {
     int agents;
     cin >> agents;
