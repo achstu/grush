@@ -1,17 +1,18 @@
 #include "process.hpp"
+#include <cassert>
+#include <cstdio>
 #include <stdexcept>
 #include <string>
 #include <sys/types.h>
-#include <unistd.h>
-#include <cassert>
 #include <sys/wait.h>
+#include <unistd.h>
 
-ChildProcess::ChildProcess(const std::string& command) {
+ChildProcess::ChildProcess(const std::string &command) {
 
   if (pipe(stdin_pipe) == -1 || pipe(stdout_pipe) == -1) {
     throw std::runtime_error("Pipe failed");
   }
-  
+
   pid = fork();
   if (pid == 0) {
     // child process
@@ -42,27 +43,32 @@ ChildProcess::~ChildProcess() {
   }
 }
 
-void ChildProcess::write(const std::string& message) {
+void ChildProcess::write(const std::string &message) {
   ::write(stdin_pipe[1], message.c_str(), message.size());
-  ::write(stdin_pipe[1], "\n", 1);
+  // ::write(stdin_pipe[1], "\n", 1);
+}
+
+inline char ChildProcess::getchar() {
+  char ch;
+  ssize_t bytes = read(stdout_pipe[0], &ch, 1);
+
+  if (bytes == 1) {
+    return ch;
+  } else if (bytes == 0) {
+    return EOF;
+  } else {
+    // read failed
+    assert(false);
+  }
 }
 
 std::string ChildProcess::readline() {
   std::string line;
-  char buffer[256];
-  ssize_t bytes;
-
-  while ((bytes = read(stdout_pipe[0], buffer, sizeof(buffer)-1)) > 0) {
-    buffer[bytes] = '\0';
-    line += buffer;
-    if (line.find('\n') != std::string::npos) {
+  while (true) {
+    char ch = this->getchar();
+    if (ch == '\n')
       break;
-    }
+    line.push_back(ch);
   }
-
-  if (!line.empty() && line.back() == '\n') {
-    line.pop_back();
-  }
-
   return line;
 }

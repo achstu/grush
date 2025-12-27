@@ -9,7 +9,11 @@ enum Action {
   LEFT, RIGHT, BACK, GO, FIRE, MINE
 };
 
+#include <iostream>
+
 static inline Action parse(const std::string& s) {
+  std::cerr << "CERR " << s << "|" << s.length() << "\n";
+
   if (s == "LEFT") return LEFT;
   else if (s == "RIGHT") return RIGHT;
   else if (s == "BACK") return BACK;
@@ -31,9 +35,4 @@ static inline int rotation(Action action) {
 }
 
 using Turn = std::vector<Action>;
-
-
-
-
-
 

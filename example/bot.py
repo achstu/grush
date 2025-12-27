@@ -1,4 +1,5 @@
 import sys
+import random
 
 board_size, turns = map(int, input().split())
 
@@ -14,5 +15,7 @@ for _ in range(turns):
         row, col, object, dist, rot = input().split()
 
     for _ in range(agents):
-        print("FIRE", flush=True)
+        actions = ["FIRE", "GO", "MINE", "LEFT", "RIGHT", "BACK"]
+        a = random.choice(actions)
+        print(a, flush=True)
 

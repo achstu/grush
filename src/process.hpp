@@ -14,4 +14,5 @@ public:
 
   void write(const std::string &message);
   std::string readline();
+  char getchar();
 };

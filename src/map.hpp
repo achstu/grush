@@ -4,7 +4,7 @@
 #include <format>
 #include <vector>
 
-const int N = 50;
+const int N = 45;
 const int ITER = 1000;
 
 enum Square { BLOCK, EMPTY };
@@ -59,7 +59,9 @@ struct Grush {
   Agent *agents_ptr[N][N];
   std::vector<Player> players;
 
-  Grush();
+  // Grush() = default;
+  static Grush empty();
+  static Grush semi_random(int num_players, int num_agents);
   void update(const std::vector<Turn> &turns);
   void update_vision();
   // static inline bool check_bounds(Position p) {
