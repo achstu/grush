@@ -1,5 +1,10 @@
 # grush
 
+### Contestants
+
+- https://github.com/mastach/grush
+- https://github.com/opprotossball/GRush-Crusher
+
 ### Usage
 
 Compile arena program (requires c++20)
@@ -36,11 +41,13 @@ On the beggingin of each game turn, on the first line of inputs is single intege
 
 The next `a` lines contains info about agnets in following format:
 
-`row col TYPE dist ROTATION` where
+`row col TYPE dist ROTATION has_gold` where
 - `row col` pos of agent
 - `TYPE` is one of strings: `WALL`, `GOLD`, `ALLY`, `ENEMY`
 - `dist` (intteger) is distance to that object (of type `TYPE`)
 - `ROTATION` is single character: `U`, `R`, `D` or `L` (rotation of agent)
+- `has_hold` is boolean flag (`0` or `1`)
+
 
 Your task is print `a` lines on stdout conating information about agent actions. For each agent print single word:
 - `GO`
