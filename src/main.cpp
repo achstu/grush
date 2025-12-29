@@ -100,7 +100,7 @@ int main(int argc, char *argv[]) {
     clear();
     std::cout << it << " ITER" << std::endl;
     std::cout << grush.to_string(stats) << std::endl;
-    system("sleep 0.01");
+    // system("sleep 0.01");
 
     history.push_back(std::move(stats));
   }
