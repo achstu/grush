@@ -3,6 +3,7 @@ src/arena
 src/.cache
 src/compile_commands.json
 
+*.pdf
 report/statistics.txt
 
 example/bot
